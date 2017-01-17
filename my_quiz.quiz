@@ -1,0 +1,1491 @@
+{
+  // example quiz text
+  // <- (this is a comment and will be ignored)
+
+  // this is the url for your quiz
+  "url": "http://jgbdev.github.io/ml_quiz/",
+
+  // this are your UoB candidate numbers as a comma separated list
+  "candidate_number": [0],
+
+  // this is the title of the quiz
+  "title": "COMS30301 Quiz",
+
+  "1": {
+    "difficulty": "1",
+    "reference": "1.1",
+    "problem_type": "definitions",
+   "question" : "Depending on the target goal for machine learning, different tasks are used . <br>\
+                  Use the cards below to match the target type to the machine learning task.",
+    // these are answers, a correct answer
+    // is indicated by a "+", incorrect answer has a "-"
+    "answer_type": "matrix_sort_answer",
+       "answers": [
+          { "correctness": "Binary and multi-class classification",
+            "answer": "categorical",
+            "explanation": "Often used to define a label categorical "
+          },
+          { "correctness": "Regression" ,
+            "answer": "numerical",
+            "explanation": "Regression is used to output a numerical number"
+          },
+          { "correctness": "Clustering",
+            "answer": "hidden",
+            "explanation": "Cluster is used to find hidden variables as often this is \
+            used in un supervised learning where the class/value is unknown the model"
+          }
+      ],
+    "hint": "Use the textbook to look up the definitions",
+    "workings": "From the definition in textbook <br>\
+                  Regression -> numical output,<br>\
+                  Binary and multi-class classification -> Categorical answer<br>\
+                  Clustering -> Hidden variables ",
+    "source": "Textbook 1.1",
+    "comments": "Can be answered by looking up a passage in textbook, 1 difficulty"
+  },
+  "2": {
+    "difficulty": "3",
+    "reference": "5.1",
+    "problem_type": "training",
+   "images": [
+      { "url": "img/question_2/question_2_dataset.PNG",
+        "caption": "Training to build the decision tree model \
+        <br> The data has three features:<br>\
+        Price, Persons, Safety <br>\
+        Unacc is the class label"
+        }
+    ],
+    "question" : "Terry wants to use his past experiences with car purchases  \
+                  to help him avoid picking a new car he would later regret <br>\
+                  He collects the data from his previous car purchases, which is included \
+                  below. <br>\
+                  He asks you to build a decision model using the training data (below), \
+                 using Entropy to for the best split and taking unacc as  \
+                 the positive class.<br> \
+                 <br>\
+                 When building the tree, stop splitting a node if the number of instances in the node is \
+                 five or less or the majority class is above 90%. <br>\
+                 Label each node with the majority class. <br>\
+                 After building the tree, evaluate the model by classifying the training data. <br> \
+                 <br>\
+                 Record your results in a contingency table and calculate the precision. <br>\
+                 Select the answer which is equal to your value. <br> ",    
+    // these are answers, a correct answer
+    // is indicated by a "+", incorrect answer has a "-"
+    "answer_type": "single",
+    "answers": [
+      { "correctness": "-",
+        "answer": "0.72"
+      },
+      { "correctness": "+",
+        "answer": "0.875",
+        "explanation": "Taking the final contingency table from workings<br>\
+          Contingency table<br>\
+              [14, 2]<br>\
+              [2, 11 ]<br>\
+            Precision = 14/(14+2) = 0.875"
+      },
+      { "correctness": "-",
+        "answer": "0.912"
+      },
+      { "correctness": "-",
+        "answer": "0.845"
+      }
+    ],
+    "hint": "Entropy calculation $-p\\log_{2}p-(1-p)\\log_{2}(1-p)$ ",
+     "workings": "\
+    \
+    Calculated the weighted entropy of the children at each split using <br><br>\
+    $$\\sum_{i=1}\\frac{n_{i}}{n}(-p\\log_{2}p-(1-p)\\log_{2}(1-p))$$<br><br>\
+    To maximise the information gain, I choose the split with the lowest weighted entropy<br><br>\
+    Split 1:<br>\
+
+    Detailed calculation for Safety split:<br><br>\
+    $-0.9\\log_{2}(0.9)-0.1\\log_{2}(0.1) = 0.469$<br>\
+    $-\\frac{4}{9}\\log_{2}(\\frac{4}{9})-\\frac{5}{9}\\log_{2}(\\frac{5}{9}) = 0.991$<br>\
+    $-0.3\\log_{2}(0.3)-0.7\\log_{2}(0.7) = 0.881$<br>\
+
+    Weighted Entropy = $\\frac{10}{29}0.469+\\frac{9}{29}0.991+\\frac{10}{29}0.881=0.773$<br>\
+
+    Safety  [9+,1-][4+,5-][3+,7-] : Weighted entropy = 0.77(Chosen)<br>\
+    Price   [7+,2-][1+,3-][2+,1-][6+,7-] : Weighted entropy = 0.89<br>\
+    Persons [6+,6-][7+,2-][3+,5-]         : Weighted entropy = 0.914<br><br>\
+   
+
+    Split 2: Saftey Medium<br>\
+    Price [2+,2-][1+,0-][1+,3-] Weighted entropy = 0.805<br>\
+    Persons [3,-1][1,-3][0+,1-] Weighted entropy = 0.72(Chosen)<br>\
+    <br><br>\
+    
+
+    Split 3: Saftey High<br>\
+    Price [2+,0-][0+,3-][1+,4-] Weighted entropy = 0.361(Chosen)<br>\
+    Price [2+,0-][0+,3-][2+,3-] Weighted entropy = 0.490<br>\
+    <br><br>\
+
+    <b>Final Tree :</b><br>\
+    Showing the route from route to branch<br>\
+    The feature in parentesis is the splitting feature, followed by the value on the current \
+    path. <br>\
+    (Safety) low [9+,-1]<br>\
+    (Safety) med - (Persons) 2 [3+,-1]<br> \
+    (Safety) med - (Persons) 4 [1+,-3] <br>\
+    (Safety) med - (Persons) more [0,-1]<br>\
+    \
+    (Safety) high - (Price) vhigh [2+,-0]<br>\
+    (Safety) high - (Price) high [0+,-3]<br>\
+    (Safety) high - (Price) low [1+,-4]<br>\
+    <br>\
+    We can now easily build a contingency table by classifying the training data<br>\
+    $$\\begin{vmatrix} \
+     &Pred + &Pred -  & \\\\  \
+     Actual +& 14 &2  & 16 \\\\  \
+     Actual -& 2 &11  & 13 \\\\ \
+     &  16& 13 & 29\
+    \\end{vmatrix}$$\
+    <br><br>\
+    Precision = $\\frac{TP}{TP+FP}$<br>\
+    Precision = 14/(14+2) = 0.875",
+    "source": "Textbook 1.2 and 5.1",
+    "comments": "\
+    Requires candidate to have a strong understanding of how a Decision Tree is formed.\
+    Must have a knowledge of how to use the Entropy equation, what it represents and why \
+    it's used to split the tree.<br>\
+    After building the tree the candidate has a further task of calculating the precision\
+    which checks they can evaluate how well the Decision tree has classified the training \
+    "
+  },
+  "3": {
+    "difficulty": "3",
+    "reference": "9.2",
+    "problem_type": "training",
+   "images": [
+       { "url": "img/question_3/dataset.PNG",
+       "caption": "Training data"
+       },
+       { "url": "img/question_3/test.PNG",
+       "caption": "Testing data"
+       }
+     ],
+    "question" : "\
+      Doctor X is investigating the symptoms of this new disease which has hit his \
+      patients. He wants to avoid expensive blood tests and instead use the symptoms reported by \
+      his patients as a diagnosis tool.  <br>\
+      He asks ten patients to record how many times during the week they experience the following \
+      symptoms: <br>\
+      Stomach Ache, Back Pain, Cough, Sneezing.<br>\
+      He then performs a blood test on the ten patients to test if they have the disease.<br>\
+      <br>\
+      He records their results and asks you to build a Naive Bayes Model \
+      (taking into account frequency of symptoms). <br>\
+      He also tells you that the accepted probability of someone in the population having the \
+      disease is 0.2. <br>\
+      He then asks you to diagnose 4 test patients <br>\
+      <br>\
+      Tick below which patient your model diagnosed with the disease.<br>\
+      <br>\
+      In an alternative scenario the Doctor discards the frequency of the symptoms. <br>\
+      Retrain the Bayesian Model, but this time disregard the frequency of the symptoms, \
+      by only taking into account if the symptom occurred.<br>\
+      <br>\
+      Retest the test patients and tick the 'Changed' box if the new model classifies results \
+       differently to the previous one.<br>\
+    ", 
+    
+    // these are answers, a correct answer
+    // is indicated by a "+", incorrect answer has a "-"
+    "answer_type": "multiple",
+    "answers": [
+      { "correctness": "-",
+        "answer": "t1",
+        "explanation": "Ratio < 1"
+      },
+      { "correctness": "+",
+        "answer": "t2",
+        "explanation": "Ratio > 1"
+      },
+      { "correctness": "+",
+        "answer": "t3",
+        "explanation": "Ratio > 1"
+      },
+      { "correctness": "-",
+        "answer": "t4",
+        "explanation": "Ratio < 1"
+      },
+      { "correctness": "+",
+        "answer": "Changed",
+        "explanation": "Classification of second model different to first"
+      }
+    ],
+    "hint": "Make sure you use Laplace correction to smooth out the extreme results <br>\
+             Focus on calculating the ratios been the probabilities of being in either class, <br>\
+             the numerical probabilities have little relevance on their own.",
+     "workings": "<br>\
+     Count Model:<br>\
+     With symptoms in order, summing each class generated the following counts:<br>\
+     p:  7  10  7 2 <br>\
+     n:  3  6 0 2<br>\
+     Using Laplace correction, I calculated the probabilities for having a symptom in <br>\
+     each class<br>\
+<br>\
+     p: ($\\frac{4}{15}$, $\\frac{11}{30}$, $\\frac{4}{15}$, $\\frac{1}{10}$ )<br>\
+     n: ($\\frac{4}{15}$, $\\frac{7}{15}$, $\\frac{1}{15}$, $\\frac{1}{5}$ )<br>\
+<br>\
+     If we divide the probability of each of the positive features, by the negative features <br>\
+     we obtain the following probabilities.<br>\
+     (1, $\\frac{11}{14}$, 4, 0.5)<br>\
+<br>\
+     Therefore we can obtain following likelihood using the ratio between the probability of each <br>\
+     feature and the frequency it occurs in the testing point. <br>\
+     Dividing the positive and negative probabilities for each feature we get the following <br>\
+     (1, $\\frac{11}{14}$ , 4 , 0.5)<br>\
+     <br>\
+     This can now calculate the likelihood ratio: <br>\
+       $$1^{f1} \\frac{11}{14}  ^{f2}4^{f3}  0.5 ^{f4}$$ <br>\
+<br>\
+     Where fn is the count of feature n in the data point being classified.<br>\
+<br>\
+     We calculate the prior ratio: $\\frac{P(+)}{P(-)}$.<br>\
+     Prior ratio = $\\frac{0.2}{1-0.2} = 0.25$.<br>\
+<br>\
+     To take this into account in our likelihood ratio we multiply it by our prior ratio.<br>\
+     $$\\frac{11}{14}  ^{f2}4^{f3}  0.5 ^{f4} 0.25$$ <br>\
+<br>\
+    When the likelihood ratio is above 1 the $P(+|x) > P(-|x)$, therefore we classify as positive.<br>\
+    If the likelihood ratio is less that 1 we classify as negative <br>\
+<br>\
+     Classifying our 4 test patients : <br>\
+     t1: $\\frac{11}{14}  ^{2}4^{1}  0.5 ^{2} 0.25 = \\frac{121}{754}$ (negative)<br>\
+     t2: $\\frac{121}{95}$ (positive)<br>\
+     t3: $4$ (positive)<br>\
+     t5: $\\frac{11}{15}$ (negative)<br>\
+<br>\
+     t2,t3 classed as positive.<br>\
+<br>\
+     Now train again, this time not taking into account frequency of symptoms.<br>\
+     Modify the symptoms so that any value above 0 is replaced with 1.<br>\
+<br>\
+     Sum the symptoms in each class<br>\
+     p: 4 5 4 2<br>\
+     n: 2 4 0 3<br>\
+<br>\
+     Using Laplace correction I generate the probabilities for each feature in each class.<br>\
+     p: ($\\frac{5}{7}$,$\\frac{6}{7}$,$\\frac{5}{7}$,$\\frac{3}{7}$) <br>\
+     n: ($\\frac{3}{7}$,$\\frac{5}{7}$,$\\frac{1}{7}$,$\\frac{3}{7}$)<br>\
+<br>\
+     I can now use the likelihood ratio * prior ratio (0.25) to classify the test data.<br>\
+     Like above, a value above 1 will be classed as positive. <br>\
+     A value below 1 will be classed as negative<br>\
+     <br>\
+     For classifying a test point, if a given feature is positive we take the probability class class \
+     + contains the feature divided by the probability in class - contains the feature. \
+     If the feature is negative we take the probability each class doesn't contain the feature \
+     by taking $ 1 - p $ instead. <br>\
+     <br>\
+     We multiply all the values to get our likelihood ratio.\
+<br>\
+     t1 = (1,1,1,1)<br>\
+     ratio: $\\frac{5}{3}\\frac{6}{5}\\cdot5\\cdot 1 \\cdot 0.25 = 2.5$ (Positive)<br>\
+<br>\
+     t2 = (1,1,1,1)<br>\
+     ratio: $\\frac{5}{3}\\frac{6}{5}\\cdot5\\cdot 1 \\cdot 0.25 = 2.5$ (Positive)<br>\
+<br>\
+     t3 = (1,0,1,0)<br>\
+     ratio: $\\frac{5}{3}\\frac{1}{2}\\cdot5\\cdot 1 \\cdot 0.25 = \\frac{25}{24}$ (Positive)<br>\
+<br>\
+     t3 = (1,1,1,0)<br>\
+     ratio: $\\frac{5}{3}\\frac{6}{5}\\cdot5\\cdot 1 \\cdot 0.25 = 2.5$ (Positive)<br>\
+<br>\
+     t1,t2,t3,t4 classified as positive.<br>\
+<br>\
+     ",
+    "source": "Textbook 9.2",
+    "comments": "Requires the candidate to have knowledge of how a Bayesian model is trained for count and boolean\
+     values. The candidate also needs to be able to correctly use the trained model for classification.\
+     Requires a significant amount of calculation, justifying difficulty 3\
+         "
+  },
+  "4": {
+      "difficulty": "3",
+      "reference": "6.3",
+      "problem_type": "calculation",
+     "images": [
+        { "url": "img/question_4/rule_list.PNG",
+          "caption": "Transaction list"
+          }
+      ],
+      "question" : "Dave's Electronic store wants to group items which sell well together. <br>\
+                    So he can answer the question, if the customer buys product A then they will <br>\
+                    likely buy product B.<br><br>\
+                    Todo this he records the transactions for one day and presents them to you <br>\
+                    with the transactions below. <br<br>>\
+                    Using the transactions, form two rules. <br><br>\
+                    Rule 1: If X then Y <br>  \
+                    Rule 2: If J then K <br><br> \
+                    By matching the items to the corresponding letter below. <br>\
+                    Ensure that Rule 1 has higher confidence then Rule 2.<br><br>",                   
+      // these are answers, a correct answer
+      // is indicated by a "+", incorrect answer has a "-"
+      "answer_type": "matrix_sort_answer",
+       "answers": [
+          { "correctness": "X   ",
+            "answer": "Phone",
+            "explanation": "Top rule if X is Phone "
+          },
+          { "correctness": "Y    " ,
+            "answer": "USB Cable",
+            "explanation": "Top rule if Phone then Y is USB Cable"
+          },
+          { "correctness": "J    ",
+            "answer": "Camera",
+            "explanation": "Second highest rule: if X is Camera"
+          },
+          { "correctness": "K    ",
+            "answer": "SD Card",
+            "explanation": "Second highest rule if Camera then Y is USB Cable"
+          }
+      ],
+      "hint": "Use the AssociationRules algorithm to generate a set of Maximal frequent items <br>\
+      Draw a set lattice to visualise the transactions, making it easier to complete the Association Rule \
+      algorithm. <br> Do some post processing to check for superfluous rules. \
+       ",
+      "workings": "\
+<br>\
+      We use the AssociationRules algorithm to generate a set of association rules<br>\
+      that exceed your given threshold for support and confidence.<br>\
+<br>\
+      Support is the number of transactions that contain the target item.<br>\
+      Confidence calculates the ratio of transactions that fit the target rule.<br>\
+      Support is used calculated confidence. <br>\
+      E.g Confidence of rule (if X then Y) : $Support(X \\cup Y)/Support(Y)$<br>\
+<br>\
+<br>\
+      We set a reasonable threshold of 0.6 confidence and 3 support.<br>\
+<br>\
+      First we need to generate a maximal item set to generate a set of items to <br>\
+      find rules from.<br>\
+<br>\
+      We use the FrequentItems algorithm to with a threshold of 3 to find the sets. <br>\
+<br>\
+      Starting with the empty set. <br>\
+      Extend to SD Card.<br>\
+      {SD Card}, support 6 (Add to queue, not max).<br>\
+      Extend {USB Cable}<br>\
+      {USB Cable}, support 8 (Add to queue, not max).<br>\
+<br>\
+      Next: SD Card<br>\
+      Extend {SD Card, Camera}<br>\
+      {SD Card, Camera} Support 4 (Add to queue, not max)<br>\
+      Extend {SD Card, Phone }<br>\
+      {SD Card, Phone }, support 1<br>\
+      <br>\
+      Next: USB Cable<br>\
+      Extend {USB Cable, Phone}<br>\
+      {USB Cable, Phone}, support 5 (Add to queue, not max)<br>\
+      Extend {USB Cable, Camera} <br>\
+      {USB Cable, Camera}, support 1<br>\
+<br>\
+      Next: {SD Card, Camera}<br>\
+      Extend {SD Card, Camera, Phone}<br>\
+      {SD Card, Camera, Phone}, support 1<br>\
+      max = true, add to max item set<br>\
+<br>\
+      Next: {USB Cable, Phone}<br>\
+      Extend {USB Cable, Phone, Camera}<br>\
+      {USB Cable, Phone, Camera}, support 1<br>\
+      max = true, add to max item set<br>\
+      <br>\
+      Output maximal item sets{{USB Cable, Phone} ,{USB Cable, Camera}  }    <br>\
+<br>\
+      Next calculate the support and confidence for the rules in each of <br>\
+      the maximal item sets<br>\
+<br>\
+<br>\
+      Below is the list of all possible rules <br>\
+<br>\
+      if  phone then  usb cable: support 5 confidence 0.83  lift 1.46<br>\
+      if  camera  then  sd card: support 4 confidence 0.80  lift 1.87<br>\
+      if  sd card then  camera : support 4 confidence 0.67  lift 1.87<br>\
+      if  usb cable then  phone: support 5 confidence 0.63  lift 1.46<br>\
+      <br>\
+      Calculation for lift: Lift(if X then Y) = $\\frac{n\\cdot Supp(X\\cup Y)}{Supp(Y)Supp(X)}<br>\
+      <br>\
+      We also calculate the lift to filter out superfluous rules<br>\
+      Remove any values 1 or less<br>\
+      If lift (if X then Y) <= 1, no better than doing if True then Y  <br>\
+      All four rules have a lift > 1, so no need to filter<br>\
+      Take the top 2 rules<br>\
+      if phone then usb cable <br>\
+      if camera then sd card",
+      "source": "Textbook 6.3",
+      "comments": "\
+      Candidate has to have the understanding of what the support, confidence \
+      formulas are and how they can be applied to the transaction list. <br>\
+      The candidate also has to have the knowledge of the pre processing step called \
+      lift and how to use it to filter out superfluous results. <br>\
+      The question involves a lot of calculation to calculate the support and confidence \
+      for each rule.\
+      "
+  }, 
+  "5": {
+      "difficulty": "3",
+      "reference": "6.2",
+      "problem_type": "evaluation",
+      "images": [
+        { "url": "img/question_5/feature_list.PNG",
+          "caption": "Feature lists"
+          }
+      ],
+      "answer_type": "blank_answer",
+      "question": [ "In this question we explore the differences \
+      between ordered and unordered lists by comparing their accuracy on \
+      a ROC curve <br> \
+      <br> \
+      To answer the question, preform the following steps <br>\
+      1. From the feature list below, pick two single rules, A and B that captures the most  \
+      of each class <br> \
+      2. Generate two ordered rule lists, swapping A and B as the \
+      first rule <br>\
+      3. Calculate the AUC for each rule list, making note of the highest.<br>\
+      4. Calculate a rule tree by calculating the overlap between the rules. <br>\
+      5. Calculate the AUC for the rule tree <br>\
+      6. Fill in the fields below for the AUC of highest rule set and rule tree<br>\
+      AUC for ordered rule list is: ", 1,". <br>",
+      "AUC for rule tree: ", 2, ".<br>"
+    ],
+    "answers": [
+      { "correctness": 1,
+        "answer": "0.82",
+        "explanation": "See workings"
+      },
+      { "correctness": 2,
+        "answer": "0.84",
+        "explanation": "See workings"
+      }
+    ],
+
+
+      "hint": "The AUC can be calculated as the area under a ROC curve<br> \
+      When calculating the rule tree, look back at the rule list to see which \
+      rules overlap.<br>\
+      When building the rule list, exclude the items covered in the previous rule\
+      ",
+      "workings": "\
+      For the positive class, colour = red covers the most at 4.<br>\
+      
+      For the negative class Doors = 5 covers the most at 4.<br>\
+
+      Therefore create two rules A, B.<br>\
+
+      A: Colour = red [p1-p3 p5 | n5]<br>\
+      B: Doors  = 5   [ p3 - p5 | n1 - n3 n5] <br>\
+      This forms the two ordered lists <br>\
+      <br>\
+      1:<br>\
+      if A then + [4+ 1-]<br>\
+      else if B then - [1+ 3-]<br>\
+      else - [0+ 1-]<br>\
+      <br>\
+      error =  $4\\cdot1\\cdot0.5 + 3\\cdot1*0.5 + 1 = 4.5$<br>\
+      <br>\
+      2:<br>\
+      if B then - [3+ 4-]<br>\
+      else if A + [2+ 0-]<br>\
+      else - [0 1-]<br>\
+      error = 6 = 3*4*0.5<br>\
+      Rule order AB has lowest error<br><br>\
+      AUC can be calculated as the area under the ROC curve,<br>\
+      AUC = (error-total_area)/total_area = $(25-4.5)/25 = 0.82$<br>\
+      <br>\
+      Next generate rule tree<br>\
+      <br>\
+      To do so we have to calculate the intersection of A and B.<br>\
+      As we have access to the training data we can calculate this, <br>\
+      else we would have estimate. <br>\
+<br>\
+      A and B [2+ 1-]<br>\
+      We can also calculate further intersections<br>\
+      A and !B [2+ 0-]<br>\
+      B and !A [1+ 3-]<br>\
+<br>\
+      We can experiment with two trees, with either A or B at root.<br>\
+      A root:<br>\
+      Split <br>\
+      A [4+ 1-]<br>\
+      !A [1+ 4-]<br>\
+      We can split A branch further<br>\
+      A and B [2+ 1-]<br>\
+      A and !B [2+ 0-]<br>\
+<br>\
+      This generates the following ranking [2+ 0-][2+ 1-][1+ 4-]<br>\
+      Gives an error of 4, AUC = 0.84<br>\
+<br>\
+      B root:<br>\
+      Split<br>\
+      B [3+ 4-]<br>\
+      B! [2+ 1-]<br>\
+<br>\
+      B branch can be further split<br>\
+      B and A [2+ 1-]<br>\
+      B and !A [1+ 3-]<br>\
+<br>\
+      This generates the ranking [2+ 1-][2+ 1-][1+ 3-]<br>\
+      Error = $2\\cdot0.5\\cdot2*0.5+3\\cdot0.5+2+2=7.5$<br>\
+<br>\
+      A at root is picked as it has the lowest error and therefore highest AUC<br>\
+      ",
+      "source": "Textbook 6.3 and 6.1",
+      "comments": "\
+      The candidate has to be able to pick the best rules out the rule list. \
+      Using that the candidate then has to generate ordered rule lists and evaluate how well they perform by ranking the leaves.\
+      The candidate has to do this again but with an unordered rule set \
+      which involves calculating the overlapping regions in order to generate the \
+      rule tree"
+  },
+  "6": {
+    "difficulty": "3",
+    "reference": "8.3",
+    "problem_type": "calculation",
+    "question" : "K-means algorithm was used to generate the following clustering, <br>\
+                $$\
+                \\begin{bmatrix} \
+                 2&3 \\\\ \
+                  7 & \\frac{22}{3} \
+                \\end{bmatrix}\
+                $$\
+                with one of the datasets below. <br>\
+                Apply k-means algorithm to each of the datasets to find which one was used. <br>\
+                Apply k-means with these initial centroids<br>\
+                [0 1] and [4 4] <br>",
+                                
+    // these are answers, a correct answer
+    // is indicated by a "+", incorrect answer has a "-"
+    "answer_type": "single",
+    "answers": [
+      { "correctness": "+",
+        "answer": "w:<br>\
+        $\
+                \\begin{bmatrix} \
+                 1&2 \\\\ \
+                  3 & 4 \\\\ \
+                  5 & 6 \\\\ \
+                  7 & 8 \\\\ \
+                  9 & 8 \
+                \\end{bmatrix}\
+                $",
+        "explanation": "Final iteration for w in workings matches the clustering matrix above "   
+      },
+      { "correctness": "-",
+        "answer": "x:<br>\
+        $\
+                \\begin{bmatrix} \
+                 1&2 \\\\ \
+                  3 & 4 \\\\ \
+                  5 & 6 \\\\ \
+                  7 & 8 \\\\ \
+                  9 & 10 \
+                \\end{bmatrix}\
+                $"
+      },
+      { "correctness": "-",
+        "answer": "y:<br>\
+$\
+                \\begin{bmatrix} \
+                 1&2 \\\\ \
+                  5 & 4 \\\\ \
+                  5 & 6 \\\\ \
+                  7 & 8 \\\\ \
+                  9 & 10 \
+                \\end{bmatrix}\
+                $\
+        "
+      },
+      { "correctness": "-",
+        "answer": "z:<br>\
+$\
+                \\begin{bmatrix} \
+                 1&3 \\\\ \
+                  5 & 4 \\\\ \
+                  5 & 6 \\\\ \
+                  4 & 7 \\\\ \
+                  9 & 10 \
+                \\end{bmatrix}\
+                $"
+      }
+    ],
+    "hint": "Keep running the k-means algorithm until there is no change in the centroids.<br>\
+    Make sure you initialise your initial clusters with the centroids [0 1][4 4]",
+     "workings": "\
+      <br>\
+      Starting at centroids <br>\
+      $$\
+      \\begin{bmatrix} \
+       0&1 \\\\ \
+        4 & 4 \
+      \\end{bmatrix}\
+      $$<br>\
+      Apply k-means (k=2) until there is no change in the centroids. <br>\
+      At each iteration, group the values to the closest centroid, <br>\
+      then update the centroid with the mean of those values.\
+<br>\
+      <b>x:</b> <br>\
+      Iteration 1:<br>\
+      x1 -> cluster 1<br>\
+      x2-x5 -> cluster 2<br>\
+      Recompute mean <br>\
+      $\
+      \\begin{bmatrix} \
+        1&2 \\\\ \
+        6&7 \
+      \\end{bmatrix}\
+      $<br>\
+      Iteration 2:<br>\
+      $\
+      \\begin{bmatrix} \
+        2&3 \\\\ \
+        7&8 \
+      \\end{bmatrix}\
+      $<br>\
+      Iteration 3:<br>\
+       $\
+      \\begin{bmatrix} \
+        2&3 \\\\ \
+        7&8 \
+      \\end{bmatrix}\
+      $<br>\
+      Stop, no change.<br>\
+<br>\
+      <b>y:</b><br>\
+      Iteration 1:<br>\
+      $\
+      \\begin{bmatrix} \
+        1&3 \\\\ \
+        6.5&7 \
+      \\end{bmatrix}\
+      $<br>\
+      Iteration 2:<br>\
+      $\
+      \\begin{bmatrix} \
+        \\frac{11}{3}&\\frac{13}{3} \\\\ \
+       8&9 \
+      \\end{bmatrix}\
+      $<br>\
+      Iteration 3:<br>\
+$\
+      \\begin{bmatrix} \
+        \\frac{11}{3}&\\frac{13}{3} \\\\ \
+       8&9 \
+      \\end{bmatrix}\
+      $<br><br>\
+      <b>z:</b><br>\
+      Iteration 1:<br>\
+ $\
+      \\begin{bmatrix} \
+        1&3 \\\\ \
+        5.75&6.75 \
+      \\end{bmatrix}\
+      $<br>\
+
+
+      Iteration 2:<br>\
+$\
+      \\begin{bmatrix} \
+        3&3.5 \\\\ \
+        6&\\frac{23}{3} \
+      \\end{bmatrix}\
+      $<br>\
+
+      Iteration 3:<br>\
+$\
+      \\begin{bmatrix} \
+        3&3.5 \\\\ \
+        6&\\frac{23}{3} \
+      \\end{bmatrix}\
+      $<br>\
+<br>\
+      <b>w:</b><br>\
+      Iteration 1:<br>\
+      $\
+      \\begin{bmatrix} \
+        1&2 \\\\ \
+        6&6 \
+      \\end{bmatrix}\
+      $<br>\
+
+
+      Iteration 2:<br>\
+$\
+      \\begin{bmatrix} \
+        2&3 \\\\ \
+        7&\\frac{22}{3} \
+      \\end{bmatrix}\
+      $<br>\
+
+      Iteration 3:<br>\
+      $\
+      \\begin{bmatrix} \
+        2&3 \\\\ \
+        7&\\frac{22}{3} \
+      \\end{bmatrix}\
+      $<br>",
+
+    "source": "Textbook 8.3",
+    "comments": "\
+    Candidate must have knowledge on the k-means algorithm, \
+    they have to perform this algorithm a significant number of times which \
+    justifies the higher difficulty. \
+    "
+  },
+  "7": {
+    "difficulty": "3",
+    "reference": "8.2",
+    "problem_type": "evaluation",
+    "answer_type": "blank_answer",
+    "images": [
+      { "url": "img/question_7/train.PNG",
+        "caption": "Training data"
+      },
+      { "url": "img/question_7/test.PNG",
+        "caption": "Testing data"
+      }
+    ],
+    "question" : [ "Use k = 1 nearest neighbour with the labelled training data \
+    to test the testing data below.<br>\
+    Use two versions of k=1 nearest neighbour, each with different distance metrics, euclidean and Manhattan.<br>\
+    After classifying each of the training points, record the results in a contingency matrix for \
+    each distance metric. <br>\
+    Which distance metric had the highest accuracy. Manhattan or Euclidean ? ", 1,"<br><br>",
+    "And by how much? (Give answer as fraction) ", 2, " <br>"],
+
+    // these are answers, a correct answer
+    // is indicated by a "+", incorrect answer has a "-"
+    "answers": [
+      { "correctness": 1,
+        "answer": "Manhattan",
+        "explanation": "Manhattan had highest accuracy, see workings"
+      },
+      { "correctness": 2,
+        "answer": "1/6",
+        "explanation": "2/3 (Manhattan accuracy) - 1/2 (Euclidean accuracy) = 1/6"
+      }
+    ],
+    "hint": "Euclidean distance: $D(a,b) = (\\sum_{i=1}^{n} (a-b)^{2})^{1/2})$ <br>\
+              Manhattan Distance : $D(a,b) = \\sum_{i=1}^{n} |a-b|$ <br>\
+              With k=1 nearest neighbour, use the class of the nearest point in \
+              the model.\
+     ",
+    "workings": "To calculate the class of the testing data I calculate the \
+    distance (using euclidean and Manhattan) for each of the training points \
+    as k = 1, I take the class of the point with the shortest distance. <br> \
+    The arrow -> points to the closest training item for the test point <br>  \
+    This denotes class (x)<br> \
+    Euclidean:<br>\
+    10 10 -> 13 13 (1) <br>\
+    5 3 -> 5 5 (1) <br>\
+    3 2 -> 4 1 (1) <br>\
+    4 4 -> 2 4 (0) <br>\
+    9 8 -> 5 6 (0) <br>\
+    16 15 -> 13 13(1) <br>\
+    <br>\
+    Compare the predicted class to the actual class and <br>\
+    generate the contingency table:<br>\
+
+    $$\\begin{vmatrix} \
+     &Pred + &Pred -  & \\\\  \
+     Actual +& 2 &1  & 3 \\\\  \
+     Actual -& 2 &1  & 3 \\\\ \
+     &  4& 2 & 6\
+    \\end{vmatrix}$$\
+
+
+    Accuracy = (TP+FP)/total =  $(2+1)/6 = 1/2$ \
+    <br>\
+    Manhattan:<br>\
+    10 10 -> 15 10 (0) <br>\
+    5 3 -> 5 5 (1) <br>\
+    3 2 -> 1 2 (1) <br>\
+    4 4 -> 2 4 (0) <br>\
+    9 8 -> 5 6 (0) <br>\
+    16 15 -> 16 11(1) <br>\
+    <br>\
+    Generate the contingency table:<br>\
+    $$\\begin{vmatrix} \
+     &Pred + &Pred -  & \\\\  \
+     Actual +& 2 &1  & 3 \\\\  \
+     Actual -& 1 &2  & 3 \\\\ \
+     &  3& 3 & 6\
+    \\end{vmatrix}$$\
+    Accuracy = (TP+FP)/total = $(2+2)/6 = 2/3$   \
+    ",
+    "source": "Textbook 8.2",
+    "comments": "Candidate has to apply the k-nearest neighbour algorithm to a set of training data. \
+    The candidate has to understand how the algorithm classifies points and be able to apply two different \
+    distance metrics. <br>\
+    The candidate then also has to understand how to compare the results of the two distance metrics \
+    by calculating the ranking accuracy.\
+    "
+  },
+  "8": {
+  "difficulty": "3",
+  "reference": "11.2",
+  "problem_type": "evaluation",
+  "question" : "In this question we will see how boosting can alter the results of a simple classifier. \
+   In this question we will classify the training data below using a linear classifier. We will then apply the \
+   ensemble technique, Boosting until the algorithm aborts. <br>\
+   <br>\
+   Draw a contingency table, evaluating the training data for the linear classifier and boosted linear classifier. \
+   <br> \
+   Calculate the absolute difference in the new contingency table below. <br> ",
+    // these are answers, a correct answer
+    // is indicated by a "+", incorrect answer has a "-"
+    "images": [
+      { "url": "img/question_8/train_data.PNG",
+        "caption": "Training data"
+      }
+    ],
+    "answer_type": "cloze_answer",
+    "answers": {
+      "answer": ["1 | 1 | 0 ",
+                 "----------",
+                 "1 | 1 | 0 ",
+                 "----------",
+                 "2 | 2 | 0"],
+      "explanation": "See workings for final contingency table"
+    },
+    "hint": " The Linear Classifier takes the average value of the positive and negative class, adjusting how much  \
+     each point contributes to the average is an simple method to adjusting the model. <br>\
+     Ensure you correctly initialise each weight with values $1/n$ <br>\
+     The goal of each iteration is to increase the weight of incorrectly classified points",
+    "workings": "\
+
+    Using the boosting algorithm each training point has a weight w1-wn which adjusts how much each training point \
+    contributes to the mean and error of the model. <br> \
+
+    At the first iteration I initialise each weight at $1/n$ <br>\
+
+    Using the Linear Classifier we calculate the mean of each class, we use the weights to adjust the contribution of \
+    each point <br><br>\
+
+    For example the weighted mean for the positive class can be described as follows :<br>\
+     e.g average weighted centre for positive the class:  <br>\
+    $$\\begin{vmatrix}  \
+     \\frac {w1x1+w2x2+w3x3+w4x4}{w1+w2+w3+w4} & \\frac {w1y1+w2y2+w3y3+w4y4}{w1+w2+w3+w4} \
+ \\end{vmatrix} \
+    $$<br>\
+
+    At the first iteration the weighted average for the positive class is <br>\
+    $\\begin{vmatrix}  \
+     1.25 & 0.75 \
+  \\end{vmatrix} \
+    $<br>\
+    and <br>\
+    $\\begin{vmatrix}  \
+     -1.5 & 1  \
+  \\end{vmatrix} \
+    $<br>\
+    for the negative class <br>\
+
+    Then I can generate the decision boundary for the linear classifier with $t = -0.5625$ <br>\
+
+    I then classify each point: <br>\
+     $$\\begin{vmatrix} \
+      M(x1)& M(x2)& M(x3)& M(x4)& M(x5)  & M(x6)& M(x7)& M(x8) \\\\ \
+      1 &   1 &    -1&     1 &   -1 &  -1   & -1  &  -1 \
+    \\end{vmatrix}$$ \
+
+    I can now calculate the weighted error : $e=0.125$.<br>\
+
+    Because the error is less than 0.5 we calculate the $\\alpha$ value, adjust the weights perform another iteration. <br><br>\
+
+    $$\\alpha = 0.5\\log_{2}{\\frac{1-e}{e}} = 0.973 $$\
+
+    We then update each weight depending if the training point was correctly classified or not <br>\
+
+    If it was correctly classified : $wn(t+1) = wn(t)/2-e)$ (Reducing weight)<br>\
+    else: $wn(t+1) = wn(t)/2e)$  (Increase weight)<br>\
+
+    My new weights are as followed: <br>\
+    $$\\begin{vmatrix} \
+     w1&    w2&    w3  &  w4   & w5   & w6 &  w7 &    w8 \\\\ \
+     0.071&0.071&  0.5 &  0.071&  0.071 & 0.071&  0.071  & 0.071 \
+    \\end{vmatrix}$$ \
+
+   I perform the iteration until my weighted error $>=0.5$, generating the table below <br><br>\
+
+    $$\\begin{vmatrix} \
+
+      M(x1)& M(x2)& M(x3)& M(x4)& M(x5)  & M(x6)& M(x7)& M(x8)& e &a &  w1&    w2&    w3  &  w4   & w5   & w6 &  w7 &    w8 \\\\ \
+      1 &   1 &    -1&     1 &   -1 &  -1   & -1  &  -1  & 0.125 &0.973& 0.125& 0.125& 0.125& 0.125& 0.125& 0.125& 0.125&  0.125\\\\ \
+      1  &   1  & 1 &1 & -1 &  1 &  -1&  -1  &  0.07 & 1.282  & 0.071&  0.071&  0.5 &  0.071&  0.071 & 0.071&  0.071  & 0.071 \\\\ \
+      1 &1 &-1 & 1& 1 & 1& 1&-1&1&1    &0.038& 0.038 &0.269 &0.038& 0.038& 0.5 &  0.038&  0.038 \
+      \\end{vmatrix} \
+
+    $$\
+
+    I can now uses the table to construct a new model, using the weighed average of each $\\alpha$ value.<br>\
+    The final output of model = $M(X) = M1\\cdot\\alpha(1) + M2\\cdot\\alpha(2) $<br>\
+    <br>\
+    0.972955075*$\\begin{vmatrix} 1& 1& -1& 1& -1 &-1 &-1 &-1 \\end{vmatrix}$<br>\
+    +<br>\
+    1.282474679*$\\begin{vmatrix} 1& 1& 1& 1& -1 &1 &-1 &-1 \\end{vmatrix}$<br>\
+    =<br>\
+    $\\begin{vmatrix} 2.255 &2.255& 0.310& 2.255& -2.255&  0.310 &-2.255 & -2.255\\end{vmatrix}$<br>\
+    Taking 0 as threshold<br>\
+     $$\\begin{vmatrix} 1& 1& 1& 1& -1 &1 &-1 &-1 \\end{vmatrix}$$<br>\
+     is the final output of the boosted Linear Classifier.<br>\
+    We can now generate a contingency table, comparing the results to the true class labels<br>\
+ $$\\begin{vmatrix} \
+     &Pred + &Pred -  & \\\\  \
+     Actual +& 4 &0  & 4 \\\\  \
+     Actual -& 1 &3  & 4 \\\\ \
+     &  5& 3 & 8\
+    \\end{vmatrix}$$\
+
+    Using the linear classifier, we can simply take the results from the first iteration<br>\
+    $$\\begin{vmatrix} 1& 1& -1& 1& -1 &-1 &-1 &-1 \\end{vmatrix}$$<br>\
+    Which Generates the following contingency table<br>\
+
+ $$\\begin{vmatrix} \
+     &Pred + &Pred -  & \\\\  \
+     Actual +& 3 &1  & 4 \\\\  \
+     Actual -& 0 &4 & 4 \\\\ \
+     &  3& 5 & 8\
+    \\end{vmatrix}$$\
+
+
+    The absolute difference |boosted-linear|:<br>\
+
+ $$\\begin{vmatrix} \
+     &Pred + &Pred -  & \\\\  \
+     Actual +& 1 &1  & 0 \\\\  \
+     Actual -& 1 &1  & 0 \\\\ \
+     &  2& 2 & 0\
+    \\end{vmatrix}$$\
+
+    ",
+    "source": "Textbook 11.2, Algorithm 11.3",
+    "comments": "Requires lots of calculations to calculate the weighted linear classifier at every step.\
+    The candidate also has to know how to adjust linear classifier with a weighted values.\
+    The candidate then has to compare the two classifiers by showing the difference by comparing two \
+    contingency tables."
+  },
+"9": {
+  "difficulty": "3",
+  "reference": "11.1",
+  "problem_type": "training",
+  "question" : "Use the random forest algorithm to build 3 decision trees, using the Entropy\
+      as the splitting criteria.<br>\
+      Use the training data and the three subsets below, and take unacc as the positive class.<br>\
+      <br>\
+      After building the three trees, test the training data on the three trees. Classify by taking the \
+      majority decision of the three trees. <br>\
+      Fill in the contingency table with your results.\
+      ",
+    // these are answers, a correct answer
+    // is indicated by a "+", incorrect answer has a "-"
+    "images": [
+      { "url": "img/question_9/dataset.PNG",
+        "caption": "Training data"
+      },
+      { "url": "img/question_9/dataset_sub_1.PNG",
+        "caption": "Training data, random subset 1"
+      },
+      { "url": "img/question_9/dataset_sub_2.PNG",
+        "caption": "Training data, random subset 2"
+      },
+      { "url": "img/question_9/dataset_sub_3.PNG",
+        "caption": "Training data, random subset 3"
+      }
+
+    ],
+    "answer_type": "cloze_answer",
+    "answers": {
+      "answer": ["11 | 0 | 11 ",
+                 "----------",
+                 "1 | 5 | 6 ",
+                 "----------",
+                 "12 | 5 | 17"],
+      "explanation": "See workings for final contingency table"
+    },
+    "hint": "Entropy calculation $-p\\log_{2}p-(1-p)\\log_{2}(1-p)$ odds <br>\
+    Information gain: Entropy (parent) - weighted average entropy of children <br>\
+    Calculate a decision tree as normal for each of the datasets<br>\
+    Then classify each item on all three trees, taking the majority decision of the three",
+    "workings": "<br>\
+
+    For each subset of the training data I generate a Decision Tree <br><br>\
+
+    At each split on the decision tree I calculate the weighted average entropy. <br>\
+    Parent entropy - weighted average entropy = Information Gain (IG)<br>\
+    The split with the highest information gain is chosen<br>\
+    Subset 1:<br>\
+    Split 1: <br>\
+    Price [1+ 4-][2+ 1-][2+ 0-] IG 0.36<br>\
+    maint-cos [2+ 2-][2+ 2-][2+ 1-][1+ 0-]  IG 0.32<br>\
+    doors [2+ 3-][2+ 2-][1+ 0-] IG 0.11<br>\
+    person  [0+ 3-][4+ 2-][1+ 0-] IG 0.45<br>\
+    safety  [2+ 2-][1+ 3-][2+ 0-] IG 0.28<br>\
+<br>\
+    Pick Person feature<br>\
+    Split 2:<br>\
+    Price [2+ 1-][1+ 0-][1+ 1-] IG  0.13<br>\
+    maint-cos [2+ 0-][2+ 1-][0+ 1-] IG  0.46<br>\
+    doors [2+ 1-][1+ 1-][1+ 0-] IG  0.13<br>\
+    safety  [2+ 0-][2+ 0-][0+ 2-] IG  0.92<br>\
+    Pick Safety feature <br>\
+<br>\
+    All pure, can finish splitting.<br>\
+<br>\
+    Subset 2:<br>\
+    Split 1:<br>\
+    Price [3+ 1-][2+ 1-][2+ 0-][1+ 0-]  IG  0.12<br>\
+    maint-cos [1+ 0-][2+ 1-][2+ 0-][3+ 1-]  IG  0.12<br>\
+    doors [4+ 1-][2+ 1-][2+ 0-] IG  0.09<br>\
+    person  [5+ 2-][3+ 0-]  IG  0.12<br>\
+    safety  [2+ 0-][3+ 2-][3+ 0-] IG  0.24<br>\
+    Pick Safety feature<br>\
+<br>\
+    Price [0+ 1-][1+ 0-][1+ 0-][1+ 1-]  IG  0.57<br>\
+    maint-cos [0+ 1-][2+ 0-][1+ 1-] IG  0.57<br>\
+    doors [0+ 1-][1+ 1-][2+ 0-] IG  0.57<br>\
+    person  [0+ 2-][3+ 0-]  IG  0.97<br>\
+    Pick person feature<br>\
+<br>\
+    All pure, can finish splitting.<br>\
+<br>\
+    Subset 3:<br>\
+    Split 1:<br>\
+    Price [3+ 0-][1+ 4-][1+ 0-][1+ 0-]  IG  0.61<br>\
+    maint-cos [1+ 2-][1+ 2-][2+ 0-][2+ 0-]  IG  0.42<br>\
+    doors [2+ 3-][1+ 1-][3+ 0-] IG  0.29<br>\
+    person  [2+ 2-][4+ 0-][0+ 2-] IG  0.57<br>\
+    safety  [1+ 3-][4+ 1-][1+ 0-] IG  0.29<br>\
+    Pick Price feature<br>\
+<br>\
+    Split 2:<br>\
+    maint-cos [1+ 2-][0+ 2-]  IG  0.17<br>\
+    doors [1+ 3-][0+ 1-]  IG  0.07<br>\
+    person  [1+ 2-][0+ 2-]  IG  0.17<br>\
+    safety  [0+ 1-][1+ 0-][0+ 3-] IG  0.72<br>\
+    Pick Safety feature<br>\
+<br>\
+    All pure, can finish splitting.<br>\
+<br><br><br>\
+    After building the 3 decision trees I classify the training data on all trees. <br>\
+    Recording the results of each tree in TN column.<br>\
+    I then use the majority decision of the Decision trees as my final class output. <br><br>\
+    
+ $$\\begin{vmatrix} \
+    X& T1& T2& T3& Class \\\\ \
+    1& 1& 1& 1 &1\\\\ \
+    2& 0& 0& 0 &0\\\\ \
+    3& 1& 1& 1 &1\\\\ \
+    4& 1& 1& 1 &1\\\\ \
+    5& 1& 1& 1 &1\\\\ \
+    6& 1& 1& 1 &1\\\\ \
+    7& 0& 1& 0 &0\\\\ \
+    8& 0& 1& 0 &0\\\\ \
+    9& 1& 1& 1 &1\\\\ \
+    10&  1&1& 0 &1\\\\ \
+    11&  1&1& 1 &1\\\\ \
+    12&  1&1& 1 &1\\\\ \
+    13&  0&0& 1 &0\\\\ \
+    14&  0&& 0 &0\\\\ \
+    15&  1& 1& 1& 1\\\\ \
+    16&  1& 1& 1& 1\\\\ \
+    17&  0& 1& 1& 1\
+    \\end{vmatrix}$$\
+
+  
+<br>\
+    I can now complete the contingency table <br>\
+
+ $$\\begin{vmatrix} \
+     &Pred + &Pred -  & \\\\  \
+     Actual +& 11 &0  & 11 \\\\  \
+     Actual -& 1 &5  & 6 \\\\ \
+     &  12& 5 & 17\
+    \\end{vmatrix}$$\
+
+    ",
+    "source": "Textbook 11.1",
+    "comments": "This requires involved calculation, building three trees, classifying each point\
+      on all trees. Then taking the majority decision of the three."
+  },
+  "10": {
+    "difficulty": "5",
+    "reference": "0",
+    "problem_type": "calculation",
+   "question" : "In the world described with the caption Initial World, the goal is to move from \
+                 the starting position in grey to one of the two green finishing positions, whilst \
+                 collecting the highest reward. The number on each cell is the reward. <br>\
+
+                 Movement is non deterministic with a 60% chance of moving in the desired direction, \
+                 20% of the time you instead move left of the target direction, 20% of the time you move \
+                 right. <br><br>\
+
+                 Reinforcement learning is an area of machine learning which uses a reward function to find \
+                 optimal solutions based off past previous moves. \
+
+                 For example you may learn that the cell next to the -100 reward is not the optimal position, \
+                 as there is a chance you might move into it. <br>\
+
+                 The ValueIteration algorithm aims to quantify this by iteratively scoring each cell and giving it a \
+                 utility score. <br>\
+
+                 Perform one iteration of the Value Iteration Algorithm \
+                 to update Utility values in each cell.<br>\
+                 Do not update the Utility value from the final value cells (green). <br><br>\
+
+                 Use the Utility values to sum the values of the four paths. By summing the Utility Value of the cells \
+                 the paths traverse. <br>\
+                 Rank the value of each path from highest (top), to lowest (bottom) <br>\
+                  ", 
+    // these are answers, a correct answer
+    // is indicated by a "+", incorrect answer has a "-"
+    "images": [
+      { "url": "img/question_10/world.PNG",
+        "caption": "Initial world"
+      },
+      { "url": "img/question_10/world_answer_a.PNG",
+        "caption": "Path a"
+      },
+      { "url": "img/question_10/world_answer_b.PNG",
+        "caption": "Path b"
+      },
+      { "url": "img/question_10/world_answer_c.PNG",
+        "caption": "Path d"
+      },
+      { "url": "img/question_10/world_answer_d.PNG",
+        "caption": "Path d"
+      }
+    ],
+
+    "answer_type": "sort",
+    "answers": [
+      { "correctness": "4",
+        "answer": "a",
+        "explanation": "Path value 176.8"
+      },
+      { "correctness": "3",
+        "answer": "b",
+        "explanation": "Path value 180"
+      },
+      { "correctness": "1",
+        "answer": "c",
+        "explanation": "Path value 188"
+      },
+      { "correctness": "2",
+        "answer": "d",
+        "explanation": "Path value 185.6"
+      }
+    ],
+    "hint": "Value iteration step function: <br> \
+    $$U_{t+1}(i) = R(i) + \\max_{a}\\sum_{j}M_{ij}^a\\cdot  U_{t}(j)$$<br>\
+    Make sure you take into account the probability of moving in a certain direction. Remember that there \
+    is only a 60% chance of moving in your desired direction.\
+    ",
+    "workings": " <br>\
+    Each cell has a utility value U(j) at each time step<br>\
+    Each cell has a reward value R(j), which is stays constant<br>\
+    $M_{ij}^a$ probability of reaching state i from j with action a<br>\
+    At the first iteration, U(j) = R(j)<br>\
+    For each cell in the grid apply this function <br>\
+    $U_{t+1}(i) = R(i) + \\max_{a}\\sum_{j}M_{ij}^a\\cdot  U_{t}(j)$<br>\
+    To calculate the new Utility values<br>\
+<br>\
+    Workings for cell (1, 1). <br>\
+    t =1<br>\
+    U(2) = 4 + max {<br>\
+    0.2*4 + 5*0.6 + 1*0.4,<br>\
+    0.2*1 + 1*0.6 + 4*0.4,<br>\
+    0.2*5 + 1*0.6 + 1*0.4,<br>\
+    0.2*1 + 4*0.6 + 5*0.5<br>\
+    }<br>\
+<br>\
+    U(2) = 4 + max {4,1.6,1.8,3.6}<br>\
+    U(2) = 6 <br>\
+<br>\
+    Performing this for each cell, generates the grid with the updated Utility scores<br>\
+
+$$\\begin{vmatrix} \
+     2.8& 3.2& 63.8&  100 \\\\  \
+     2.8& 6  &2.8 &-100 \\\\  \
+     4.2& 8.4&8.8 & -16 \
+    \\end{vmatrix}$$\
+
+<br>\
+    a: $4.2 + 2.8 + 2.8 + 3.2 + 63.8 + 100 = 176.8$<br>\
+    b: $4.2 + 2.8 + 6 + 3.2 + 63.8 + 100 =180$<br>\
+    c: $4.2 + 8.4 + 8.8 + 2.8 + 63.8 + 100 =  188$<br>\
+    d: $4.2 + 8.4 + 6 + 3.2 + 63.8 + 100 =  185.6$",
+    "source": "Internet: http://ais.informatik.uni-freiburg.de <br>\
+          PDF with algorithm and descriptions: http://ais.informatik.uni-freiburg.de/teaching/ss03/ams/DecisionProblems.pdf",
+    
+    "comments": "This questions covers a reinforcement learning algorithm, Value Iterations. \
+            Performing one iteration shows the candidate has knowledge of how the algorithm is applied.\
+            The selection of the best path demonstrates how the final path would be picked when the \
+            iterations of Value Iterations have ended. Demonstrating how an algorithm uses \
+            reinforcement learning to pick the best path. <br>\
+            This is not a topic covered in Intro to Machine Learning"
+  },
+  "11": {
+    "difficulty": "5",
+    "reference": "0",
+    "problem_type": "training",
+   "question" : "Use Classifier Chains train the model with the training data below.\
+   This is a multi label classification problem, with the class columns coloured in green. <br> \
+   When using the Classifier Chains, startsfrom the left most label, acceptable then move right \
+   to the label passed-mot. <br>\
+   When classifying the data use a binary tree mode, using Entropy as the splitting criteria.<br>\
+   Stop splitting a node when it is pure, or has a count of 3 or less.<br>\
+   After building the model, classify the training points:<br><br>\
+   x1,x2,x3,x4 <br><br>\
+   Tick which had all their labels correctly classified<br><br>\
+   ",
+   "images": [
+      { "url": "img/question_11/dataset.PNG",
+        "caption": "Training data, label column is highlighted green"
+      }
+    ], 
+    // these are answers, a correct answer
+    // is indicated by a "+", incorrect answer has a "-"
+    "answer_type": "multiple",
+    "answers": [
+      { "correctness": "+",
+        "answer": "x1",
+        "explanation": "Classifier correct classified all labels"
+      },
+      { "correctness": "+",
+        "answer": "x2",
+        "explanation": "Classifier correct classified all labels"
+      },
+      { "correctness": "+",
+        "answer": "x3",
+        "explanation": "Classifier correct classified all labels"
+      },
+      { "correctness": "-",
+        "answer": "x4",
+        "explanation": "Classifier incorrectly classified label, un-acceptable "
+      }
+    ],
+    "hint": "At each iteration, incorporate the previous target label into the feature space. <br>\
+            This will prevent the loss of any dependency  information between the labels. <br>\
+            Don't use the naive method of treating each label independently, as you loose \
+            information on the dependency between the labels. ",
+    "workings": "\
+
+     Build three decision trees in an iterative approach. Each decision tree targets a different label, \
+     the class in the parenthesis. <br><br>\
+
+
+     Decision tree 1: (un-acceptable)<br>\
+     Split 1:<br>\
+     Price [3+ 0-][2+ 3-][2+ 0-][2+ 1-] IG: 0.31  (chosen)<br>\
+     Maint-cost [2+ 1-][4+ 0-][2+ 2-][1+ 1-] IG: 0.22<br>\
+     Safety: [3+ 0-][5+ 3-][1+ 1-]  IG: 0.15<br>\
+<br>\
+     Split 2:<br>\
+     Maint-cost [1+ 0-][1+ 2-][0+ 1-] IG: 0.42 (chosen)<br>\
+     Safety: [2+ 2-][0+ 1-] IG 0.17<br>\
+<br>\
+     Each node is either pure or has 3 or less items, so we can stop splitting. <br><br>\
+
+     We now build a next decision tree, but this time use the previous target label as \
+     an additional feature. <br><br>\
+
+     Decision tree 2: (had-accident)<br>\
+     Split 1:<br>\
+     Safety: IG 0.46 (Chosen)<br>\
+     Maint-cost: IG 0.25<br>\
+     Price: IG 0.11<br>\
+     un-acceptable: IG 0.28<br>\
+<br>\
+     Split 2:<br>\
+     Price: IG 0.16<br>\
+     Maint-cost: IG 0.47 (Chosen)<br>\
+     un-acceptable: IG 0.2<br>\
+<br>\
+     Decision tree 3: (passed-mot)<br>\
+     Split 1:<br>\
+     Price: IG 0.19<br>\
+     Maint-cost: IG 0.12<br>\
+     Safety: IG 0.56<br>\
+     un-acceptable: IG 0.20<br>\
+     had-accident: IG 0.61 (Chosen)<br>\
+<br>\
+     Split 2:<br>\
+     Price: IG 0.72(Chosen)<br>\
+     Maint-cost: IG 0.17<br>\
+     Safety: IG 0.32<br>\
+     un-acceptable: IG 0<br>\
+<br>\
+     Using the three decision trees to classify each of the three labels.<br>\
+     The trees output the following labels<br>\
+     x1 -> unacc yes no<br>\
+     x2 -> unacc yes no<br>\
+     x3 -> unacc yes no<br>\
+     x4 -> acc no  yes<br>\
+     <br>\
+     x1,x2,x3 is correctly classified.\
+     ",
+    "source": "https://cran.r-project.org/web/packages/MLPUGS/vignettes/tutorial.html ,\
+    http://www.cs.waikato.ac.nz/ml/publications/2009/chains.pdf , \
+    http://www.aic.uniovi.es/~juanjo/Homepage_Juan_Jose_del_Coz_Velasco/juanjo_files/gfkl2012postconf_submission_55.pdf ",
+    "comments": "Simple definition test on calculating the posterior odds,\
+     a useful formula for taking into account prior probabilities."
+  },
+  "12": {
+    "difficulty": "5",
+    "reference": "0",
+    "problem_type": "problem-solving",
+   "question" : "Two traffic officers manage this one section of road. <br>\
+   Over the course of one day between them they record 4 incidents, one in each \
+   shift <br>\
+   In order from first to last: <br>\
+   Arrest, Arrest, Speeding, No-insurance <br>\
+   <br>\
+   Unfortunately both officers are on holiday and they have no record of who \
+   recorded each of the four instances. <br>\
+   However they do know the following about each officer.<br>\
+   <br>\
+   <b>Office H:</b><br>\
+   Probability of Incident<br>\
+   Arrest: 0.4<br>\
+   Speed: 0.2<br>\
+   No-Insurance: 0.2<br>\
+   Duty probabilities:<br>\
+   Does first shift: 0.5<br>\
+   Do next shift: 0.3<br>\
+   Change over: 0.7<br>\
+<br>\
+   <b>Office J:</b><br>\
+   Probability of Incident<br>\
+   Arrest: 0.5<br>\
+   Speed: 0.2<br>\
+   No-Insurance: 0.1<br>\
+   Duty probabilities:<br>\
+   Does first shift: 0.5<br>\
+   Do next shift: 0.4<br>\
+   Change over: 0.6<br>\
+<br>\
+<br>\
+   Using the information above, find the most likely shift pattern for officers \
+   H and J on that day. <br>\
+<br>\
+   Order the cards below, so that top is the first shift, bottom is the last shift.\
+   ", 
+    // these are answers, a correct answer
+    // is indicated by a "+", incorrect answer has a "-"
+    "answer_type": "sort",
+    "answers": [
+      { "correctness": "2",
+        "answer": "H",
+        "explanation": "Ordering JHJH"
+      },
+      { "correctness": "1",
+        "answer": "J",
+        "explanation": "Ordering JHJH"
+      },
+      { "correctness": "3",
+        "answer": "J",
+        "explanation": "Ordering JHJH"
+      },
+      { "correctness": "4",
+        "answer": "H",
+        "explanation": "Ordering JHJH"
+      }
+    ],
+    "hint": "Map the above problem to a Hidden Markov Model Algorithm(HMM), all the information is present. <br>\
+    1. Start probabilities<br>\
+    2. Chance of observing a particular state (Incident types)<br>\
+    3. Transition probabilities (Change shift)<br>\
+    After building the model, use the Viterbi Algorithm to find the most likely ordering of the hidden variables",
+    "workings": "<br>\
+    Build HMM model.<br>\
+    Start:<br>\
+    Prob(H) = 0.5<br>\
+    Prob(J) = 0.5<br>\
+    <br>\
+    H:<br>\
+    Prob(Arrest) = 0.4<br>\
+    Prob(Speed) = 0.2<br>\
+    Prob(No-insurance)=0.2<br>\
+<br>\
+    J:<br>\
+    Prob(Arrest) = 0.5<br>\
+    Prob(Speed) = 0.2<br>\
+    Prob(No-insurance)=0.1<br>\
+    <br>\
+    Transitions: Prob(i,j) = Probability transition i to j <br>\
+    Prob(H,H) = 0.3<br>\
+    Prob(H,J) = 0.7<br>\
+    Prob(J,H) = 0.6<br>\
+    Prob(J,J) = 0.4<br>\
+<br>\
+    Viterbi Algorithm:<br>\
+    $P_{l}(i,x) = e_{l}(i)max(p_{k}(j,x-1)\\cdot p_{kl})$<br>\
+    Where $e_{l}(i)$ probability of observing i at l<br>\
+    $p_{kl}$: Probability of transitioning from k to l.<br>\
+    $P_{l}(i,x)$ Probability of most probable path ending at<br>\
+    state l, and with observation i at position x.<br>\
+<br>\
+We can make multiplying the  probabilities easier by taking the logarithm, <br>\
+    so we can sum them instead<br>\
+<br>\
+    Log scaled probabilities:<br>\
+    Start:<br>\
+    Prob(H) = -0.693<br>\
+    Prob(J) = -0.693<br>\
+    <br>\
+    H:<br>\
+    Prob(Arrest) = -0.916<br>\
+    Prob(Speed) = -1.609<br>\
+    Prob(No-insurance)= -1.609<br>\
+<br>\
+    J:<br>\
+    Prob(Arrest) = -0.693<br>\
+    Prob(Speed) = -1.609<br>\
+    Prob(No-insurance)= -2.3<br>\
+    <br>\
+    Transitions:<br>\
+    Prob(H,H) = -1.204<br>\
+    Prob(H,J) = -0.357<br>\
+    Prob(J,H) = -0.511<br>\
+    Prob(J,J) = -0.916<br>\
+<br>\
+    Position 1 (A):<br>\
+    H: Prob(H)+Prob(A) = -0.693-0.916 = -1.609<br>\
+    J: Prob(J)+Prob(A) = -0.693-0.693 - -1.386 (Select)<br>\
+<br>\
+    Position 2: (A)<br>\
+    H: Prob(J,H)+Prob(A)+P(1,J) = -0.511-0.916-1.386 = -2.813 (Select)<br>\
+    J: Prob(J,J)+Prob(A)+P(1,J) = -0.916-0.693-1.386 = -2.995<br>\
+<br>\
+    Position 3: (B)<br>\
+    H: Prob(H,H)+Prob(B)+P(2,H) = -5.626 <br>\
+    J: Prob(H,J)+Prob(B)+P(2,H) = -4.779 (Select)<br>\
+<br>\
+    Position 3: (C)<br>\
+    H: Prob(J,H)+Prob(C)+P(3,J) = -6.889 (Select)<br>\
+    J: Prob(J,J)+Prob(C)+P(3,J) = -7.995<br>\
+<br>\
+    Therefore this forms the sequence, JHJH with the highest probability at $2^{-6.889} = 0.844%$", 
+    "source": "Internet: mlg.eng.cam.ac.uk/zoubin/papers/ijprai.pdf <br>\
+     https://en.wikipedia.org/wiki/Hidden_Markov_model <br\
+     https://en.wikipedia.org/wiki/Viterbi_algorithm<br\
+     ee163.caltech.edu/old/2005/handouts/viterbi.pdf<br\
+     ",
+    "comments": "\
+    Requires knowledge of HMM model, and it's application. Requires knowledge of Viterbi algorithm. <br>\
+    Both are topics not covered in lectures. This question demonstrates the candidates knowledge by performing \
+    a fairly complex practical problem. This justifies difficulty 5."
+   
+  }
+
+
+
+
+  //RG14820 - 16337 Questions
+
+}
