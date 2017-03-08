@@ -478,16 +478,11 @@
       "difficulty": "3",
       "reference": "6.3",
       "problem_type": "calculation",
-     "images": [
-        { "url": "img/question_4/rule_list.PNG",
-          "caption": "Transaction list"
-          }
-      ],
       "question" : "Dave's Electronic store wants to group items which sell well together. <br>\
                     So he can answer the question, if the customer buys product A then they will <br>\
                     likely buy product B.<br><br>\
-                    Todo this he records the transactions for one day and presents them to you <br>\
-                    with the transactions below. <br<br>>\
+                    Todo this he records the transactions for one day and presents them to you in the table below.<br><br>\
+<table><tr><th>ID</th><th>Transaction Contents</th></tr><tr><td>1</td><td>Camera, SD Card</td></tr><tr><td>2</td><td>Camera, SD Card</td></tr><tr><td>3</td><td>USB Cable</td></tr><tr><td>4</td><td>Phone, USB Cable</td></tr><tr><td>5</td><td>Phone, USB Cable</td></tr><tr><td>6</td><td>Phone, USB Cable, Camera</td></tr><tr><td>7</td><td>Phone, USB Cable, Phone</td></tr><tr><td>8</td><td>USB Cable, Phone</td></tr><tr><td>9</td><td>Camera, SD Card</td></tr><tr><td>10</td><td>Phone, USB Cable</td></tr><tr><td>11</td><td>USB Cable</td></tr><tr><td>12</td><td>USB Cable</td></tr><tr><td>13</td><td>SD Card</td></tr><tr><td>14</td><td>SD Card</td></tr></table>\
                     Using the transactions, form two rules. <br><br>\
                     Rule 1: If X then Y <br>  \
                     Rule 2: If J then K <br><br> \
