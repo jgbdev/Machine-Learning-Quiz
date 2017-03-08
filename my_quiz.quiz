@@ -993,7 +993,10 @@ $\
    <br>\
    Draw a contingency table, evaluating the training data for the linear classifier and boosted linear classifier. \
    <br> \
-   Calculate the absolute difference in the new contingency table below. <br> ",
+   Calculate the absolute difference in the new contingency table below. <br> \
+   <b> Training Data </b><br> \
+   <table><tr><th>x</th><th>y</th><th>class</th></tr><tr><td>2</td><td>1</td><td>1</td></tr><tr><td>2</td><td>3</td><td>1</td></tr><tr><td>-1</td><td>-3</td><td>1</td></tr><tr><td>2</td><td>2</td><td>1</td></tr><tr><td>-1</td><td>1</td><td>0</td></tr><tr><td>-1</td><td>-3</td><td>0</td></tr><tr><td>-2</td><td>-3</td><td>0</td></tr><tr><td>-2</td><td>1</td><td>0</td></tr></table>\
+   ",
     // these are answers, a correct answer
     // is indicated by a "+", incorrect answer has a "-"
     "images": [
