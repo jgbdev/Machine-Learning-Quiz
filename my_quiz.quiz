@@ -1136,29 +1136,24 @@ $\
   "problem_type": "training",
   "question" : "Use the random forest algorithm to build 3 decision trees, using the Entropy\
       as the splitting criteria.<br>\
-      Use the training data and the three subsets below, and take unacc as the positive class.<br>\
+      The data is labeled using the Condition column.<br><br>\
+      <b>Original data</b><br>\
+<table><tr><th>Price</th><th>Maint-cost</th><th>Doors</th><th>Persons</th><th>Safety</th><th>Condition</th></tr><tr><td>vhigh</td><td>vhigh</td><td>5more</td><td>more</td><td>high</td><td>unacc</td></tr><tr><td>low</td><td>low</td><td>5more</td><td>more</td><td>med</td><td>acc</td></tr><tr><td>high</td><td>med</td><td>3</td><td>2</td><td>med</td><td>unacc</td></tr><tr><td>med</td><td>med</td><td>2</td><td>2</td><td>med</td><td>unacc</td></tr><tr><td>low</td><td>low</td><td>5more</td><td>more</td><td>low</td><td>unacc</td></tr><tr><td>vhigh</td><td>high</td><td>2</td><td>2</td><td>med</td><td>unacc</td></tr><tr><td>low</td><td>vhigh</td><td>5more</td><td>4</td><td>high</td><td>acc</td></tr><tr><td>low</td><td>vhigh</td><td>3</td><td>4</td><td>high</td><td>acc</td></tr><tr><td>vhigh</td><td>lowhigh</td><td>2</td><td>2</td><td>med</td><td>unacc</td></tr><tr><td>low</td><td>low</td><td>5more</td><td>more</td><td>high</td><td>acc</td></tr><tr><td>low</td><td>low</td><td>5more</td><td>more</td><td>low</td><td>unacc</td></tr><tr><td>high</td><td>high</td><td>3</td><td>more</td><td>low</td><td>unacc</td></tr><tr><td>vhigh</td><td>high</td><td>3</td><td>more</td><td>med</td><td>acc</td></tr><tr><td>low</td><td>low</td><td>5more</td><td>4</td><td>med</td><td>acc</td></tr><tr><td>vhigh</td><td>high</td><td>5more</td><td>more</td><td>high</td><td>unacc</td></tr><tr><td>low</td><td>vhigh</td><td>2</td><td>more</td><td>low</td><td>unacc</td></tr><tr><td>high</td><td>low</td><td>3</td><td>2</td><td>med</td><td>unacc</td></tr></table>\
       <br>\
+      <b> Subset 1</b><br>\
+      <table><tr><th>Price</th><th>Maint-cost</th><th>Doors</th><th>Persons</th><th>Satefty</th><th>Condition</th></tr><tr><td>low</td><td>vhigh</td><td>5more</td><td>4</td><td>high</td><td>acc</td></tr><tr><td>low</td><td>low</td><td>5more</td><td>4</td><td>med</td><td>acc</td></tr><tr><td>vhigh</td><td>vhigh</td><td>5more</td><td>more</td><td>high</td><td>unacc</td></tr><tr><td>high</td><td>high</td><td>3</td><td>more</td><td>low</td><td>unacc</td></tr><tr><td>low</td><td>vhiigh</td><td>3</td><td>4</td><td>high</td><td>acc</td></tr><tr><td>vhigh</td><td>high</td><td>5more</td><td>more</td><td>high</td><td>unacc</td></tr><tr><td>low</td><td>vhigh</td><td>2</td><td>more</td><td>low</td><td>unacc</td></tr><tr><td>low</td><td>low</td><td>5more</td><td>more</td><td>med</td><td>acc</td></tr><tr><td>high</td><td>med</td><td>3</td><td>2</td><td>med</td><td>unacc</td></tr><tr><td>vhigh</td><td>high</td><td>3</td><td>more</td><td>med</td><td>acc</td></tr></table>\
+      <b> Subset 2</b><br>\
+      <table><tr><th>Price</th><th>Maint-cost</th><th>Doors</th><th>Persons</th><th>Safety</th><th>Condition</th></tr><tr><td>vhigh</td><td>vhigh</td><td>5more</td><td>more</td><td>high</td><td>unacc</td></tr><tr><td>low</td><td>low</td><td>5more</td><td>more</td><td>med</td><td>acc</td></tr><tr><td>high</td><td>med</td><td>3</td><td>2</td><td>med</td><td>unacc</td></tr><tr><td>med</td><td>med</td><td>2</td><td>2</td><td>med</td><td>unacc</td></tr><tr><td>low</td><td>low</td><td>5more</td><td>more</td><td>low</td><td>unacc</td></tr><tr><td>low</td><td>low</td><td>5more</td><td>more</td><td>low</td><td>unacc</td></tr><tr><td>high</td><td>high</td><td>3</td><td>more</td><td>low</td><td>unacc</td></tr><tr><td>vhigh</td><td>high</td><td>3</td><td>more</td><td>med</td><td>acc</td></tr><tr><td>vhigh</td><td>high</td><td>2</td><td>2</td><td>med</td><td>unacc</td></tr><tr><td>vhigh</td><td>high</td><td>5more</td><td>more</td><td>high</td><td>unacc</td></tr></table>\
+      <b> Subset 3</b><br>\
+      <table><tr><th>Price</th><th>Maint-cost</th><th>Doors</th><th>Persons</th><th>Safety</th><th>Condition</th></tr><tr><td>vhigh</td><td>vhigh</td><td>5more</td><td>more</td><td>high</td><td>unacc</td></tr><tr><td>low</td><td>low</td><td>5more</td><td>more</td><td>med</td><td>acc</td></tr><tr><td>high</td><td>med</td><td>3</td><td>2</td><td>med</td><td>unacc</td></tr><tr><td>med</td><td>med</td><td>2</td><td>2</td><td>med</td><td>unacc</td></tr><tr><td>low</td><td>low</td><td>5more</td><td>more</td><td>low</td><td>unacc</td></tr><tr><td>vhigh</td><td>high</td><td>2</td><td>2</td><td>med</td><td>unacc</td></tr><tr><td>low</td><td>vhigh</td><td>5more</td><td>4</td><td>hgih</td><td>acc</td></tr><tr><td>low</td><td>vhigh</td><td>3</td><td>4</td><td>high</td><td>acc</td></tr><tr><td>vhigh</td><td>high</td><td>2</td><td>2</td><td>med</td><td>unacc</td></tr><tr><td>low</td><td>low</td><td>5more</td><td>more</td><td>high</td><td>acc</td></tr></table>\
+      <br>\
+      Three random subsets have been taken for you to build the three decision trees.<br>\
       After building the three trees, test the training data on the three trees. Classify by taking the \
       majority decision of the three trees. <br>\
       Fill in the contingency table with your results.\
       ",
     // these are answers, a correct answer
     // is indicated by a "+", incorrect answer has a "-"
-    "images": [
-      { "url": "img/question_9/dataset.PNG",
-        "caption": "Training data"
-      },
-      { "url": "img/question_9/dataset_sub_1.PNG",
-        "caption": "Training data, random subset 1"
-      },
-      { "url": "img/question_9/dataset_sub_2.PNG",
-        "caption": "Training data, random subset 2"
-      },
-      { "url": "img/question_9/dataset_sub_3.PNG",
-        "caption": "Training data, random subset 3"
-      }
-
-    ],
     "answer_type": "cloze_answer",
     "answers": {
       "answer": ["11 | 0 | 11 ",
