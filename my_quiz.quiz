@@ -47,18 +47,192 @@
     "difficulty": "3",
     "reference": "5.1",
     "problem_type": "training",
-   "images": [
-      { "url": "img/question_2/question_2_dataset.PNG",
-        "caption": "Training to build the decision tree model \
-        <br> The data has three features:<br>\
-        Price, Persons, Safety <br>\
-        Unacc is the class label"
-        }
-    ],
     "question" : "Terry wants to use his past experiences with car purchases  \
                   to help him avoid picking a new car he would later regret <br>\
                   He collects the data from his previous car purchases, which is included \
                   below. <br>\
+                  <table>\
+                    <tr>\
+                      <th>Price</th>\
+                      <th>Persons</th>\
+                      <th>Safety</th>\
+                      <th>Acceptable</th>\
+                    </tr>\
+                    <tr>\
+                      <td>vhigh<br></td>\
+                      <td>more</td>\
+                      <td>low</td>\
+                      <td>unacc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>vhigh</td>\
+                      <td>2</td>\
+                      <td>med</td>\
+                      <td>unacc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>vhigh</td>\
+                      <td>2</td>\
+                      <td>high</td>\
+                      <td>unacc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>vhigh</td>\
+                      <td>more</td>\
+                      <td>low</td>\
+                      <td>unacc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>vhigh</td>\
+                      <td>more</td>\
+                      <td>med</td>\
+                      <td>acc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>vhigih</td>\
+                      <td>2</td>\
+                      <td>med</td>\
+                      <td>acc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>high</td>\
+                      <td>2</td>\
+                      <td>low</td>\
+                      <td>unacc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>high</td>\
+                      <td>4</td>\
+                      <td>high</td>\
+                      <td>acc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>high</td>\
+                      <td>4</td>\
+                      <td>high</td>\
+                      <td>acc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>med</td>\
+                      <td>2</td>\
+                      <td>low</td>\
+                      <td>unacc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>med</td>\
+                      <td>2</td>\
+                      <td>med</td>\
+                      <td>unacc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>med</td>\
+                      <td>2</td>\
+                      <td>low</td>\
+                      <td>acc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>low</td>\
+                      <td>4</td>\
+                      <td>low</td>\
+                      <td>unacc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>low</td>\
+                      <td>4</td>\
+                      <td>high</td>\
+                      <td>acc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>low</td>\
+                      <td>4</td>\
+                      <td>med</td>\
+                      <td>acc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>low</td>\
+                      <td>more</td>\
+                      <td>low</td>\
+                      <td>unacc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>vhigh</td>\
+                      <td>more</td>\
+                      <td>high</td>\
+                      <td>unacc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>vhigh</td>\
+                      <td>2</td>\
+                      <td>med</td>\
+                      <td>unacc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>low</td>\
+                      <td>more</td>\
+                      <td>high</td>\
+                      <td>acc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>low</td>\
+                      <td>more</td>\
+                      <td>med</td>\
+                      <td>acc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>low</td>\
+                      <td>more</td>\
+                      <td>high</td>\
+                      <td>unacc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>low</td>\
+                      <td>more</td>\
+                      <td>med</td>\
+                      <td>unacc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>low</td>\
+                      <td>4</td>\
+                      <td>high</td>\
+                      <td>acc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>low</td>\
+                      <td>4</td>\
+                      <td>low</td>\
+                      <td>unacc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>low</td>\
+                      <td>4</td>\
+                      <td>low</td>\
+                      <td>unacc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>low</td>\
+                      <td>more</td>\
+                      <td>high</td>\
+                      <td>acc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>low</td>\
+                      <td>more</td>\
+                      <td>med</td>\
+                      <td>acc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>high</td>\
+                      <td>more</td>\
+                      <td>high</td>\
+                      <td>acc</td>\
+                    </tr>\
+                    <tr>\
+                      <td>vhigh</td>\
+                      <td>2</td>\
+                      <td>low</td>\
+                      <td>unacc</td>\
+                    </tr>\
+                  </table>\
                   He asks you to build a decision model using the training data (below), \
                  using Entropy to for the best split and taking unacc as  \
                  the positive class.<br> \
@@ -69,7 +243,7 @@
                  After building the tree, evaluate the model by classifying the training data. <br> \
                  <br>\
                  Record your results in a contingency table and calculate the precision. <br>\
-                 Select the answer which is equal to your value. <br> ",    
+                 Select the answer which is equal to your value. <br> ",
     // these are answers, a correct answer
     // is indicated by a "+", incorrect answer has a "-"
     "answer_type": "single",
@@ -110,13 +284,13 @@
     Safety  [9+,1-][4+,5-][3+,7-] : Weighted entropy = 0.77(Chosen)<br>\
     Price   [7+,2-][1+,3-][2+,1-][6+,7-] : Weighted entropy = 0.89<br>\
     Persons [6+,6-][7+,2-][3+,5-]         : Weighted entropy = 0.914<br><br>\
-   
+
 
     Split 2: Saftey Medium<br>\
     Price [2+,2-][1+,0-][1+,3-] Weighted entropy = 0.805<br>\
     Persons [3,-1][1,-3][0+,1-] Weighted entropy = 0.72(Chosen)<br>\
     <br><br>\
-    
+
 
     Split 3: Saftey High<br>\
     Price [2+,0-][0+,3-][1+,4-] Weighted entropy = 0.361(Chosen)<br>\
@@ -190,8 +364,8 @@
       <br>\
       Retest the test patients and tick the 'Changed' box if the new model classifies results \
        differently to the previous one.<br>\
-    ", 
-    
+    ",
+
     // these are answers, a correct answer
     // is indicated by a "+", incorrect answer has a "-"
     "answer_type": "multiple",
@@ -323,7 +497,7 @@
                     Rule 1: If X then Y <br>  \
                     Rule 2: If J then K <br><br> \
                     By matching the items to the corresponding letter below. <br>\
-                    Ensure that Rule 1 has higher confidence then Rule 2.<br><br>",                   
+                    Ensure that Rule 1 has higher confidence then Rule 2.<br><br>",
       // these are answers, a correct answer
       // is indicated by a "+", incorrect answer has a "-"
       "answer_type": "matrix_sort_answer",
@@ -426,7 +600,7 @@
       The question involves a lot of calculation to calculate the support and confidence \
       for each rule.\
       "
-  }, 
+  },
   "5": {
       "difficulty": "3",
       "reference": "6.2",
@@ -472,7 +646,7 @@
       ",
       "workings": "\
       For the positive class, colour = red covers the most at 4.<br>\
-      
+
       For the negative class Doors = 5 covers the most at 4.<br>\
 
       Therefore create two rules A, B.<br>\
@@ -557,7 +731,7 @@
                 Apply k-means algorithm to each of the datasets to find which one was used. <br>\
                 Apply k-means with these initial centroids<br>\
                 [0 1] and [4 4] <br>",
-                                
+
     // these are answers, a correct answer
     // is indicated by a "+", incorrect answer has a "-"
     "answer_type": "single",
@@ -573,7 +747,7 @@
                   9 & 8 \
                 \\end{bmatrix}\
                 $",
-        "explanation": "Final iteration for w in workings matches the clustering matrix above "   
+        "explanation": "Final iteration for w in workings matches the clustering matrix above "
       },
       { "correctness": "-",
         "answer": "x:<br>\
@@ -1074,7 +1248,7 @@ $\
     After building the 3 decision trees I classify the training data on all trees. <br>\
     Recording the results of each tree in TN column.<br>\
     I then use the majority decision of the Decision trees as my final class output. <br><br>\
-    
+
  $$\\begin{vmatrix} \
     X& T1& T2& T3& Class \\\\ \
     1& 1& 1& 1 &1\\\\ \
@@ -1096,7 +1270,7 @@ $\
     17&  0& 1& 1& 1\
     \\end{vmatrix}$$\
 
-  
+
 <br>\
     I can now complete the contingency table <br>\
 
@@ -1140,7 +1314,7 @@ $\
                  Use the Utility values to sum the values of the four paths. By summing the Utility Value of the cells \
                  the paths traverse. <br>\
                  Rank the value of each path from highest (top), to lowest (bottom) <br>\
-                  ", 
+                  ",
     // these are answers, a correct answer
     // is indicated by a "+", incorrect answer has a "-"
     "images": [
@@ -1221,7 +1395,7 @@ $$\\begin{vmatrix} \
     d: $4.2 + 8.4 + 6 + 3.2 + 63.8 + 100 =  185.6$",
     "source": "Internet: http://ais.informatik.uni-freiburg.de <br>\
           PDF with algorithm and descriptions: http://ais.informatik.uni-freiburg.de/teaching/ss03/ams/DecisionProblems.pdf",
-    
+
     "comments": "This questions covers a reinforcement learning algorithm, Value Iterations. \
             Performing one iteration shows the candidate has knowledge of how the algorithm is applied.\
             The selection of the best path demonstrates how the final path would be picked when the \
@@ -1247,7 +1421,7 @@ $$\\begin{vmatrix} \
       { "url": "img/question_11/dataset.PNG",
         "caption": "Training data, label column is highlighted green"
       }
-    ], 
+    ],
     // these are answers, a correct answer
     // is indicated by a "+", incorrect answer has a "-"
     "answer_type": "multiple",
@@ -1374,7 +1548,7 @@ $$\\begin{vmatrix} \
    H and J on that day. <br>\
 <br>\
    Order the cards below, so that top is the first shift, bottom is the last shift.\
-   ", 
+   ",
     // these are answers, a correct answer
     // is indicated by a "+", incorrect answer has a "-"
     "answer_type": "sort",
@@ -1470,7 +1644,7 @@ We can make multiplying the  probabilities easier by taking the logarithm, <br>\
     H: Prob(J,H)+Prob(C)+P(3,J) = -6.889 (Select)<br>\
     J: Prob(J,J)+Prob(C)+P(3,J) = -7.995<br>\
 <br>\
-    Therefore this forms the sequence, JHJH with the highest probability at $2^{-6.889} = 0.844%$", 
+    Therefore this forms the sequence, JHJH with the highest probability at $2^{-6.889} = 0.844%$",
     "source": "Internet: mlg.eng.cam.ac.uk/zoubin/papers/ijprai.pdf <br>\
      https://en.wikipedia.org/wiki/Hidden_Markov_model <br\
      https://en.wikipedia.org/wiki/Viterbi_algorithm<br\
@@ -1480,7 +1654,7 @@ We can make multiplying the  probabilities easier by taking the logarithm, <br>\
     Requires knowledge of HMM model, and it's application. Requires knowledge of Viterbi algorithm. <br>\
     Both are topics not covered in lectures. This question demonstrates the candidates knowledge by performing \
     a fairly complex practical problem. This justifies difficulty 5."
-   
+
   }
 
 
