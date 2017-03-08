@@ -904,18 +904,13 @@ $\
     "reference": "8.2",
     "problem_type": "evaluation",
     "answer_type": "blank_answer",
-    "images": [
-      { "url": "img/question_7/train.PNG",
-        "caption": "Training data"
-      },
-      { "url": "img/question_7/test.PNG",
-        "caption": "Testing data"
-      }
-    ],
-    "question" : [ "Use k = 1 nearest neighbour with the labelled training data \
-    to test the testing data below.<br>\
-    Use two versions of k=1 nearest neighbour, each with different distance metrics, euclidean and Manhattan.<br>\
-    After classifying each of the training points, record the results in a contingency matrix for \
+    "question" : [ "Use k = 1 nearest neighbour with the labelled training data to test the testing data below.<br>\
+    Training Data <br>\
+    <table><tr><th>x</th><th>y</th><th>class</th></tr><tr><td>1</td><td>2</td><td>1</td></tr><tr><td>3</td><td>4</td><td>0</td></tr><tr><td>2</td><td>4</td><td>0</td></tr><tr><td>5</td><td>5</td><td>1</td></tr><tr><td>4</td><td>1</td><td>1</td></tr><tr><td>3</td><td>4</td><td>0</td></tr><tr><td>5</td><td>6</td><td>0</td></tr><tr><td>16</td><td>10</td><td>1</td></tr><tr><td>16</td><td>11</td><td>1</td></tr><tr><td>13</td><td>13</td><td>1</td></tr><tr><td>15</td><td>10</td><td>0</td></tr></table>\
+     Testing Data <br>\
+    <table><tr><th>x</th><th>y</th><th>class</th></tr><tr><td>10</td><td>10</td><td>0</td></tr><tr><td>5</td><td>3</td><td>0</td></tr><tr><td>3</td><td>2</td><td>1</td></tr><tr><td>4</td><td>4</td><td>0</td></tr><tr><td>9</td><td>8</td><td>1</td></tr><tr><td>16</td><td>15</td><td>1</td></tr></table>\
+    <bbr<Use two versions of k=1 nearest neighbour, each with different distance metrics, euclidean and Manhattan.<br>\
+    <br> After classifying each of the training points, record the results in a contingency matrix for \
     each distance metric. <br>\
     Which distance metric had the highest accuracy. Manhattan or Euclidean ? ", 1,"<br><br>",
     "And by how much? (Give answer as fraction) ", 2, " <br>"],
